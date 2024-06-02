@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using OAuthExampleAPI.Models;
-using OAuthExampleAPI.Services;
+using JWTExampleAPI.Models;
+using JWTExampleAPI.Services;
 
-namespace OAuthExampleAPI.Controllers
+namespace JWTExampleAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using OAuthExampleAPI.Models;
+using JWTExampleAPI.Models;
 
-namespace OAuthExampleAPI.Controllers
+namespace JWTExampleAPI.Controllers
 {
     [Authorize]
     [Route("api/[controller]")]

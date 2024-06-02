@@ -2,8 +2,8 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using OAuthExampleAPI.Models;
-using OAuthExampleAPI.Services;
+using JWTExampleAPI.Models;
+using JWTExampleAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

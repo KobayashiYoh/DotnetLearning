@@ -1,4 +1,4 @@
-namespace OAuthExampleAPI.Models
+namespace JWTExampleAPI.Models
 {
     public class UserLoginModel
     {

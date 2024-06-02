@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace OAuthExampleAPI.Models
+namespace JWTExampleAPI.Models
 {
     public class TodoContext : DbContext
     {
