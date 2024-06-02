@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OAuthExampleAPI.Models;
 using OAuthExampleAPI.Services;
 
 namespace OAuthExampleAPI.Controllers
@@ -31,13 +32,6 @@ namespace OAuthExampleAPI.Controllers
                 return Ok(new { token = token });
             }
             return Unauthorized();
-        }
-
-        public class UserLoginModel
-        {
-            public string? UserName { get; set; }
-            public string? Password { get; set; }
-            public string? Email { get; set; }
         }
     }
 }
