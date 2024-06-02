@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using OAuthExampleAPI.Models;
 using OAuthExampleAPI.Services;
 
@@ -18,20 +19,25 @@ namespace OAuthExampleAPI.Controllers
         [HttpPost("login")]
         public IActionResult Login([FromBody] UserLoginModel model)
         {
+            bool isConfigurationMissing = _configuration["Jwt:Key"].IsNullOrEmpty() || _configuration["Jwt:Issuer"].IsNullOrEmpty() || _configuration["Jwt:Audience"].IsNullOrEmpty() || model.UserName.IsNullOrEmpty();
+            if (isConfigurationMissing)
+            {
+                throw new InvalidOperationException("JWT configuration is incomplete.");
+            }
             // ここでデータベース照合等のユーザー認証を行う
             // サンプルは、メールアドレスとパスワードが一致する場合に成功とします
-            if (model.Email == "admin@sample.com" && model.Password == "admin")
+            if (model.Email != "admin@sample.com" || model.Password != "admin")
             {
-                var token = JWTService.GenerateToken(
-                    _configuration["Jwt:Key"] ?? "",
-                    _configuration["Jwt:Issuer"] ?? "",
-                    _configuration["Jwt:Audience"] ?? "",
-                    model.UserName ?? "",
-                    model.Email);
-
-                return Ok(new { token = token });
+                return Unauthorized();
             }
-            return Unauthorized();
+            var token = JWTService.GenerateToken(
+                key: _configuration["Jwt:Key"]!,
+                issuer: _configuration["Jwt:Issuer"]!,
+                audience: _configuration["Jwt:Audience"]!,
+                userName: model.UserName!,
+                email: model.Email
+            );
+            return Ok(new { token = token });
         }
     }
 }
