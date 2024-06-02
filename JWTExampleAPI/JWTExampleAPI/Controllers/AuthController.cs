@@ -37,7 +37,7 @@ namespace JWTExampleAPI.Controllers
                 userName: model.UserName!,
                 email: model.Email
             );
-            return Ok(new { token = token });
+            return CreatedAtAction(nameof(Login), new { token = token });
         }
     }
 }
