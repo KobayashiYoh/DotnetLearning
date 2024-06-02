@@ -22,7 +22,7 @@ namespace OAuthExampleAPI.Controllers
             // サンプルは、メールアドレスとパスワードが一致する場合に成功とします
             if (model.Email == "admin@sample.com" && model.Password == "admin")
             {
-                var token = TokenService.GenerateToken(
+                var token = JWTService.GenerateToken(
                     _configuration["Jwt:Key"] ?? "",
                     _configuration["Jwt:Issuer"] ?? "",
                     _configuration["Jwt:Audience"] ?? "",

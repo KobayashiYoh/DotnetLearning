@@ -5,8 +5,17 @@ using System.Text;
 
 namespace OAuthExampleAPI.Services
 {
-    public static class TokenService
+    public static class JWTService
     {
+        public static SymmetricSecurityKey GetSecurityKey(string? keyString)
+        {
+            if (string.IsNullOrEmpty(keyString))
+            {
+                throw new InvalidOperationException("JWT security key is missing or empty in configuration.");
+            }
+            return new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyString));
+        }
+
         public static string GenerateToken(string key, string issuer, string audience, string userName, string email)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key));

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using OAuthExampleAPI.Models;
+using OAuthExampleAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +23,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     {
         ValidIssuer = builder.Configuration["Jwt:Issuer"],
         ValidAudience = builder.Configuration["Jwt:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey
-            (Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"] ?? "")),
+        IssuerSigningKey = JWTService.GetSecurityKey(builder.Configuration["Jwt:Key"]),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = false,
